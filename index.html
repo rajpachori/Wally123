@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Windows Wallpapers</title>
+    <style>
+        /* Add your CSS styles here */
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 0px;
+        }
+        .row1 {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            font-family: saira_expanded_light;      
+            font-size: 16px;
+            background-color: mediumslateblue;
+            color: floralwhite;
+
+        }
+    
+        .wpimg {
+            padding: 1px;
+            width: 224px; /* Adjust as needed */
+            height: 128px; /* Adjust as needed */
+        }
+    
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }        
+        
+        .btn{
+            margin: 5px;
+            padding: 5px;
+            background-color: mediumslateblue;
+            color: floralwhite;
+            border: none;
+            border-radius: 5px;
+            font-family: saira_expanded_light;
+            font-size: x-small;
+        }        
+    
+        .hdr {
+         text-align: center;
+         font-family: saira_expanded_light;      
+         font-size: 24px;
+         background-color: mediumslateblue;
+         color: floralwhite;
+        }
+                
+        @font-face {
+        font-family: saira_expanded_light;
+        font-weight: bold;
+        src: url(saira_expanded_regular.ttf);
+        }
+        
+        .themettl {
+         text-align: left;
+         font-family: saira_expanded_light;      
+         font-size: 14px;
+         width: 896px;
+         margin-top: 20px;
+         
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hdr">
+        <div class="row">
+            WALLY123.COM
+        </div>
+    </header>
+
+    <div class="row1">
+        Windows 11, Windows 10 & Windows 7 HD & FHD Wallpapers & Backgrounds
+    </div>
+
+    <div class="content">
+        <!-- Images will be added here dynamically -->
+    </div>
+
+    <script>
+        // Array of image paths
+        var images = ['Images/scenery1.jpeg','Images/scenery2.jpeg','Images/scenery3.jpeg','Images/scenery4.jpeg','Images/flowers1.jpeg','Images/flowers2.jpg','Images/flowers3.jpg','Images/flowers4.jpg','Images/car1.jpeg','Images/car2.jpeg','Images/car3.jpeg','Images/car4.jpeg','Images/motorbike1.jpeg','Images/motorbike2.jpeg','Images/motorbike3.jpeg','Images/motorbike4.jpeg','Images/windows1.jpeg','Images/windows2.jpeg','Images/windows3.jpeg','Images/windows4.jpeg','Images/citylandscape1.jpeg', 'Images/citylandscape2.jpeg', 'Images/citylandscape3.jpeg', 'Images/citylandscape4.jpeg'];
+        var wallpaperTexts = ['Scenic View','Flowers','Cars','Motorbikes','Windows','City, Skyscrapers'];
+        // Get the "content" div
+        var contentDiv = document.querySelector('.content');
+
+        // Loop through the images array
+        for (var i = 0; i < images.length; i += 4) {
+            // Create a new div for the wallpaper text
+            var wallpaperDiv = document.createElement('div');
+            wallpaperDiv.textContent = wallpaperTexts[i / 4];
+            wallpaperDiv.className = 'themettl';
+            // Append the wallpaperDiv to the "content" div
+            contentDiv.appendChild(wallpaperDiv);
+        
+            // Create a new div for the row of images
+            var rowDiv = document.createElement('div');
+            rowDiv.className = 'row';
+        
+            // Create a new div for the image and its buttons
+            for (var j = i; j < i + 4 && j < images.length; j++) {
+                var imageContainer = document.createElement('div');
+                imageContainer.className = 'image-container';
+        
+                // Create a new img element
+                var img = document.createElement('img');
+                img.id = 'image' + (j + 1);
+                img.src = images[j];
+                img.alt = 'image' + (j + 1);
+                img.className = 'wpimg';
+        
+                // Create a new div for the buttons
+                var buttonContainer = document.createElement('div');
+                buttonContainer.className = 'button-container';
+                
+                // Create the Preview button
+                var previewButton = document.createElement('button');
+                previewButton.className = 'btn';
+                previewButton.textContent = 'Preview';
+                (function(img) {
+                    previewButton.onclick = function() { previewImage(img.id); };
+                })(img);
+                
+                // Create the Download button
+                var downloadButton = document.createElement('button');
+                downloadButton.className = 'btn';
+                downloadButton.textContent = 'Download';
+                (function(img) {
+                    downloadButton.onclick = function() { downloadImage(img.src); };
+                })(img);
+                
+                // Append the buttons to the buttonContainer
+                buttonContainer.appendChild(previewButton);
+                buttonContainer.appendChild(downloadButton);
+                
+                // Append the img and buttonContainer to the imageContainer
+                imageContainer.appendChild(img);
+                imageContainer.appendChild(buttonContainer);
+        
+                // Append the imageContainer to the rowDiv
+                rowDiv.appendChild(imageContainer);
+            }
+        
+            // Append the rowDiv to the "content" div
+            contentDiv.appendChild(rowDiv);
+        }
+
+        function previewImage(imageId) {
+            var img = document.getElementById(imageId);
+            var src = img.src;
+            window.open(src, '_blank');
+        }
+
+        function downloadImage(imagePath) {
+        var link = document.createElement('a');
+        link.href = imagePath;
+        link.download = 'Wallpaper_Download.jpeg';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        }
+
+    </script>
+</body>
+</html>
